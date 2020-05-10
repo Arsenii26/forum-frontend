@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    <strong>Error!</strong> {{errorMessage}}
+  </div>
+  <div class="alert alert-success" *ngIf="infoMessage">
+    <strong>Successful!</strong> {{infoMessage}}
+  </div>
+  <br>
+  <div *ngIf="!isLoading" style="text-align: center">
+<!--    i18-->
+<!--    <article>-->
+<!--      <h1 i18n="1|Text in h1 topics@@1.1">This is test text for the translation</h1>-->
+<!--      <p i18n="2|Text in p topics@@1.2">Hello</p>-->
+<!--    </article>-->
+    <br>
+    <h4>Sort topics by</h4>
+    <ul class="nav nav-pills">
+      <a class="nav-link">Sort by: </a>
+      <a class="nav-link" href="" (click)="sorting('default', $event)" [ngClass]="{'active': 'default'===selectedValue}">Default</a>
+      <a class="nav-link" href="" (click)="sorting('oldToNew', $event)" [ngClass]="{'active': 'oldToNew'===selectedValue}">By date (old-to-new)</a>
+      <a class="nav-link" href="" (click)="sorting('newToOld', $event)" [ngClass]="{'active': 'newToOld'===selectedValue}">By date (new-to-old)</a>
+    </ul>
+  </div>
+  <div *ngIf="isLoading" style="text-align: center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+<!--  <mat-form-field>-->
+<!--    <mat-label>default</mat-label>-->
+<!--    <mat-select [(ngModel)]="selectedValue" name="food">-->
+<!--      <mat-option (click)="setPostsAsc('')">default</mat-option>-->
+<!--      <mat-option (click)="setPostsAsc('date_created')" )>by date (new-to-old)</mat-option>-->
+<!--      <mat-option (click)="setPostsDesc('date_created')">by date (old-to-new)</mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>  -->
+<!--  (change)="sorting()"-->
+  <div>
+    <div *ngIf="userPost">
+  <div class="text-center">
+
+  <button mat-raised-button (click)="onCreate()" class="btn btn-success">
+    Add topic
+  </button>
+  </div>
+    </div>
+  <br>
+  <div *ngFor="let item of postList; index as ind">
+    <div class="gap-topics">
+      <div class="col-12">
+      <div class="card card-block">
+
+
+        <div class="card text-center">
+          <div class="card-header">
+            Post number: {{item.postNumber}}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Header: {{item.name}}</h5>
+            <p class="card-text">Description: {{item.description}}</p>
+            <a>
+              <button class="btn btn-success" (click)="getPostDetails(item.postNumber)">Detail</button>
+            </a>
+
+          </div>
+          <div class="card-footer text-muted">
+            {{item.dateCreated | date:" hh:mm | MMM d, y"}}
+          </div>
+
+
+          <div *ngIf="userPost === true">
+            <div *ngIf="currentUser.userId === item.userId && item.userId !== null">
+            <!--      update in the new page-->
+<!--            <button (click)="updatePost(item.postNumber, item.userId)" class="btn btn-success">Update</button>-->
+            <!--      update in dialog box-->
+            <button mat-raised-button (click)="onEdit(item.postNumber, item.userId, ind)" class="btn btn-success mr-1">Update</button>
+            <button mat-raised-button (click)="deletePost(item.postNumber, item.userId, ind)" class="btn btn-warning">Delete</button>
+          </div>
+          </div>
+        </div>
+
+      </div>
+
+  </div>
+    </div>
+    <!--loop 1-->
+  </div>
+
+
+
+
+    <div *ngIf="!isLoading" style="text-align: center">
+      <button mat-raised-button (click)="setNextPage()" class="btn btn-dark btn-lg">Load More</button>
+    </div>
+  <!--  https://www.itsolutionstuff.com/post/call-a-function-on-click-event-in-angular-8example.html-->
+  <!--  https://www.pluralsight.com/guides/angular-event-binding-->
+
+<!--  add the topic (open new page) NOT the dialog-->
+<!--  <a href="/topic/add" class="btn btn-success">-->
+<!--    <span class="glyphicon glyphicon-ok"></span> Add topic-->
+<!--  </a>-->
+
+  <app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onHandleError()"></app-alert>
+</div>
+
+</div>

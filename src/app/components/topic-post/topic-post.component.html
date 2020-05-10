@@ -1,0 +1,71 @@
+<div *ngIf="userPost">
+<br>
+<div class="text-center">
+  <button mat-raised-button (click)="onCreate()" class="btn btn-success">
+    Add details
+  </button>
+</div>
+</div>
+
+<br>
+<div *ngIf="isLoading" style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="contailer" *ngIf="!isLoading">
+  <!--    HERE: using dialog, not separate page -->
+<!--  <button (click)="showPostDetails()" class="btn btn-lg btn-success" >Add new</button> <hr/>-->
+
+  <div *ngIf="detailsList.length === 0">
+    <h2>No posts details yet!</h2>
+  </div>
+  <div *ngFor="let item of detailsList; index as ind">
+    <div class="gap-topics">
+  <div class="row" >
+
+
+    <div class="col-3">
+      <ng-container *ngFor="let user of usersList; index as ind">
+      <ng-container *ngIf="user.userId === item.userId" >
+      <h5>User: {{user.username}}</h5>
+        <img *ngIf="user.image === null" src="/assets/images/questionmark.jpg" width="130" height="90" alt="avatar" class="img-thumbnail">
+        <img *ngIf="user.image !== null" src="{{user.image.image}}" width="130" height="90" alt="avatar" class="img-thumbnail">
+      <p>{{user.firstName}} {{user.lastName}}</p>
+    </ng-container>
+      </ng-container>
+    </div>
+
+      <div class="col-9">
+  <div class="card card-block">
+<div class="card text-center">
+ <div class="card-header">
+     {{item.number}}
+ </div>
+ <div class="card-body">
+   <h5 class="card-title">{{item.name}}</h5>
+   <p class="card-text">{{item.details}}</p>
+ </div>
+ <div class="card-footer text-muted">
+     {{item.dateCreated | date:"MMM d, y"}}
+ </div>
+  <div *ngIf="userPost">
+  <div *ngIf="currentUser.userId === item.userId" >
+<!--    HERE 2: using separate page for add/update-->
+<!--  <button (click)="updatePostDetails(item.number, item.userId)" class="btn btn-success">Update</button>-->
+<!--  <button (click)="deletePostDetails(item.number, item.userId)" class="btn btn-warning">Delete</button>-->
+<!--    HERE: using dialog, not separate page -->
+    <button mat-raised-button (click)="onEditDetails(item.number, item.userId, ind)" class="btn btn-success mr-1">Update</button>
+    <button mat-raised-button (click)="deletePostDetails(item.number, item.userId, ind)" class="btn btn-warning">Delete</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!--        col-6-->
+      </div>
+    <!--    row -->
+    </div>
+      <!--     gap-topics-->
+  </div>
+</div>
+  <app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onHandleError()"></app-alert>
+</div>

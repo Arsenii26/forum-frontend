@@ -1,0 +1,51 @@
+<div *ngIf="isLoading" style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="container" *ngIf="!isLoading">
+    <div class="card card-container">
+        <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card"/>
+        <form name="form-signup" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': f.submitted && !username.valid}">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" id="username" [(ngModel)]="user.username" (keydown.space)="$event.preventDefault()" #username="ngModel" required/>
+                <div class="alert alert-danger" *ngIf="f.submitted && !username.valid">
+                    Username is required.
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': f.submitted && !email.valid}">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" (keydown.space)="$event.preventDefault()"
+                       id="email" [(ngModel)]="user.email" #email="ngModel" required/>
+                <div class="alert alert-danger" *ngIf="f.submitted && !email.valid || email.errors && (email.touched || email.dirty)">
+                    Email is required.
+                </div>
+            </div>
+
+          <div class="form-group" [ngClass]="{'has-error': f.submitted && !password.valid}">
+            <label for="password">Password</label>
+            <input type="password" id="password" #password="ngModel" [(ngModel)]="user.password"
+                   class="form-control"  name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" (keydown.space)="$event.preventDefault()">
+            <div *ngIf="password.invalid && password.errors && (f.submitted || password.touched || password.dirty)" class="alert alert-danger">
+              <div *ngIf="password.errors.required"> Password is required</div>
+              <div *ngIf="password.errors.pattern"> Minimum 8 characters with at least one number, one letter and one special character</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword"  #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword" class="form-control"
+                   name="confirmPassword" required pattern="{{ password.value }}" (keydown.space)="$event.preventDefault()">
+            <div *ngIf=" confirmPassword.invalid && (f.submitted || confirmPassword.touched)" class="alert alert-danger">
+              <div *ngIf="confirmPassword.errors.required"> Confirm password is required</div>
+              <div *ngIf="confirmPassword.errors.pattern"> Password & Confirm Password does not match</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+        <a routerLink="/login" class="btn btn-link">I have an Account!</a>
+    </div>
+</div>
+

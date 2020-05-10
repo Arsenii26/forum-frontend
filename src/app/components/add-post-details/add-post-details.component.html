@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="alert alert-warning" *ngIf="detailsForm.dirty && detailsForm.invalid">Enter valid values (At least one char)</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+   <strong>Error!</strong> {{errorMessage}}
+</div>
+<div class="alert alert-success" *ngIf="infoMessage">
+   <strong>Successful!</strong> {{infoMessage}}
+</div>
+<h4>Author: {{currentUser.username}}</h4>
+   <form (ngSubmit)="!detailsForm.invalid && addPostDetails()" #detailsForm="ngForm">
+ <fieldset class="form-group">
+   <label>Header</label>
+   <input type="text" #name="ngModel"
+   [(ngModel)]="postDetails.name" class="form-control"
+       name="name" required="required" minlength="1">
+</fieldset>
+<fieldset class="form-group">
+   <label>Post details</label>
+  <textarea type="text" #description="ngModel"
+   type="text" #details="ngModel"
+   [(ngModel)]="postDetails.details" class="form-control"
+       name="details" required="required" minlength="1"></textarea>
+</fieldset>
+
+<button type="submit" class="btn btn-success">Save</button>
+</form>
+
+
+

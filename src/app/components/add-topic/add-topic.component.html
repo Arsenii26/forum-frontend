@@ -1,0 +1,31 @@
+<div *ngIf="isLoading" style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="container" *ngIf="!isLoading">
+     <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+    <strong>Error!</strong> {{errorMessage}}
+</div>
+<div class="alert alert-success" *ngIf="infoMessage">
+    <strong>Successful!</strong> {{infoMessage}}
+</div>
+
+    <form (ngSubmit)="!todoForm.invalid && addPost()" #todoForm="ngForm">
+  <fieldset class="form-group">
+    <label>Topic Header</label>
+    <input type="text" #name="ngModel"
+    [(ngModel)]="post.name" class="form-control"
+        name="name" required="required" minlength="1" placeholder="Enter Header here...">
+</fieldset>
+
+<fieldset class="form-group">
+  <label>Description</label>
+  <textarea type="text" #description="ngModel"
+  [(ngModel)]="post.description" class="form-control"
+      name="description" required="required" minlength="1" placeholder="Type something here..."></textarea>
+</fieldset>
+
+<button type="submit" class="btn btn-success">Save</button>
+</form>
+

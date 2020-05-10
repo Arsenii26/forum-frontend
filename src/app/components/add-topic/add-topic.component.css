@@ -1,0 +1,9 @@
+textarea.ng-invalid {
+    background-color:pink;
+}
+textarea.ng-valid {
+    background-color:lightgreen;
+}
+textarea {
+  height: 150px;
+}

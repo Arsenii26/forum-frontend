@@ -1,0 +1,105 @@
+<h1 style="text-align: center">User Account Page</h1>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+	<strong>Error!</strong> {{errorMessage}}
+</div>
+<div class="alert alert-success" *ngIf="infoMessage">
+	<strong>Successful!</strong> {{infoMessage}}
+</div>
+
+<div class="container">
+  <fieldset class="form-group">
+    <img *ngIf="currentUser.image === null" src="/assets/images/questionmark.jpg" width="280" height="240" alt="avatar" class="img-thumbnail">
+    <img *ngIf="currentUser.image !== null" src="{{currentUser.image.image}}" width="280" height="240" alt="{{currentUser.username}}" class="img-thumbnail">
+    <br>
+    <app-image-upload></app-image-upload>
+  </fieldset>
+	<div class="row">
+
+        <div class="col-sm-6 my-auto text-center">
+<form (ngSubmit)="!todoForm.invalid && changeUserDetails()" #todoForm="ngForm">
+	<fieldset class="form-group">
+	  <label>First Name</label>
+	  <input type="text" #firstName="ngModel" [(ngModel)]="currentUser.firstName" class="form-control"  name="firstName">
+  </fieldset>
+  <fieldset class="form-group">
+	<label>Last Name</label>
+	<input type="text" #lastName="ngModel" [(ngModel)]="currentUser.lastName" class="form-control"  name="lastName">
+</fieldset>
+<fieldset class="form-group">
+	<label>Email</label>
+	<input type="text" #email="ngModel" [(ngModel)]="currentUser.email" class="form-control"  name="email" readonly>
+</fieldset>
+<fieldset class="form-group">
+	<label>Phone</label>
+	<input type="number" #phone="ngModel" [(ngModel)]="currentUser.phone" class="form-control"  name="phone">
+</fieldset>
+  <button type="submit" class="btn btn-success">Update</button>
+  </form>
+<!-- sm-6 -->
+</div>
+
+<div class="col-sm-6 my-auto text-center">
+  <form (ngSubmit)="!passwordForm.invalid && changeUserPassword()" #passwordForm="ngForm">
+	<fieldset class="form-group">
+	  <label>Old Password</label>
+	  <input type="password" #oldPassword="ngModel" [(ngModel)]="passwordRenewDto.oldPassword" class="form-control" required name="oldPassword">
+    <div *ngIf="oldPassword.invalid && (passwordForm.submitted || oldPassword.touched)" class="alert alert-danger">
+    <div *ngIf="oldPassword.errors.required">Old Password is required</div>
+    </div>
+  </fieldset>
+  <fieldset class="form-group">
+	<label>New Password</label>
+	<input type="password" #password="ngModel" [(ngModel)]="passwordRenewDto.password" class="form-control"  name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+    <div *ngIf="password.invalid && (passwordForm.submitted || password.touched)" class="alert alert-danger">
+    <div *ngIf="password.errors.required"> New Password is required</div>
+    <div *ngIf="password.errors.pattern"> Minimum 8 characters with at least one number, one letter and one special character</div>
+    </div>
+  </fieldset>
+<fieldset class="form-group">
+	<label>Confirm New Password</label>
+	<input type="password" #confirmPassword="ngModel" [(ngModel)]="passwordRenewDto.confirmPassword" class="form-control"  name="confirmPassword" required pattern="{{ password.value }}">
+  <div *ngIf=" confirmPassword.invalid && (passwordForm.submitted || confirmPassword.touched)" class="alert alert-danger">
+    <div *ngIf="confirmPassword.errors.required"> Confirm password is required</div>
+    <div *ngIf="confirmPassword.errors.pattern"> Password & Confirm Password does not match</div>
+  </div>
+</fieldset>
+  <button type="submit" class="btn btn-warning">Update</button>
+  </form>
+
+  <!-- sm-6 -->
+  </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-4 mx-auto text-center">
+      <form (ngSubmit)="deleteUserAccount()">
+        <label>Delete your account</label>
+        <input type="password"[(ngModel)]="passwordForDelete" class="form-control" name="password" placeholder="Confirm your password to delete">
+        <input type="submit" class="btn btn-outline-danger" value="Delete">
+      </form>
+    </div>
+    <!-- row -->
+</div>
+<!--  crop image to base64-->
+<!--  <div class="text-center">-->
+<!--    <form (ngSubmit)="updateImage()" [(ngModel)]="currentUser" >-->
+<!--      <input type="file" (change)="fileChangeEvent($event)" accept="image/*"/>-->
+
+<!--      <image-cropper-->
+<!--        [imageChangedEvent]="imageChangedEvent"-->
+<!--        [maintainAspectRatio]="true"-->
+<!--        [aspectRatio]="4 / 3"-->
+<!--        [resizeToWidth]="128"-->
+<!--        format="png"-->
+<!--        (imageCropped)="imageCropped($event)"-->
+<!--      ></image-cropper>-->
+
+<!--      <img [src]="croppedImage" />-->
+
+<!--      <button type="button" (click)="updateImage()">save cropped image in Base64 </button>-->
+<!--    </form>-->
+<!--  </div>-->
+  <br>
+  <!-- container -->
+</div>
+<app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onHandleError()"></app-alert>
+

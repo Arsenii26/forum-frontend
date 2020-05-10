@@ -1,0 +1,66 @@
+<h2>Total users = {{totalUsers}}</h2>
+<form (submit)="onFindUserByUsername(username.value)">
+  <input #username placeholder="find user by username">
+    <input type="submit" value="find">
+</form>
+<form (submit)="onFindApproxUserByUsername(usernameApprox.value)">
+  <input #usernameApprox placeholder="find approx user by username">
+  <input type="submit" value="approx find">
+</form>
+<br/>
+<div *ngIf="isLoading" style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<!--<table id="userTable" class="table table-striped" cellspacing="0" width="100%" *ngIf="!isLoading">-->
+<table id="userTable" class="table table-striped" cellspacing="0" width="100%" *ngIf="!isLoading">
+  <thead>
+  <tr>
+    <th>User Name</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Enabled</th>
+    <th>Action</th>
+    <th>Assign Role</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- ngFor for looping
+  let declare the item for loop -->
+  <tr *ngFor="let user of userList; index as ind">
+    <td>{{user.username}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.phone}}</td>
+    <td>{{user.enabled}}</td>
+
+<!--    <td [hidden]="user.enabled"><a (click)="enableUser(user.username)" style="cursor: pointer;" class="btn btn-success">Enable</a></td>-->
+<!--    &lt;!&ndash; enabled &ndash;&gt;-->
+<!--    <td [hidden]="!user.enabled"><a (click)="disableUser(user.username)" style="cursor: pointer;" class="btn btn-danger">Disable</a></td>   -->
+    <td [hidden]="user.enabled"><a (click)="enableUser(user.username, user, ind)" style="cursor: pointer;" class="btn btn-success">Enable</a></td>
+    <!-- enabled -->
+    <td [hidden]="!user.enabled"><a (click)="disableUser(user.username, user, ind)" style="cursor: pointer;" class="btn btn-danger">Disable</a></td>
+    <td><a (click)="findAllUserRoles(user.username)" style="cursor: pointer;" class="btn btn-warning">Assign Role</a></td>
+  </tr>
+  </tbody>
+</table>
+<ul class="nav nav-pills">
+  <a class="nav-link">Page: </a>
+  <a class="nav-link" href="" (click)="setPage(0,$event)" >First page</a>
+  <li class="nav-item" *ngFor="let p of pages; let i=index">
+    <a class="nav-link" href="" (click)="setPage(p,$event)" [ngClass]="{'active': p===page}">{{p + 1}}</a>
+  </li>
+  <a class="nav-link" href="" (click)="setPage(lastPage,$event)">Last page</a>
+<!--  <a class="nav-link" href="" (click)="setPage(0,$event)" [ngClass]="{'active': 0===page}">First page</a>-->
+<!--  <a class="nav-link" href="" (click)="setPage(lastPage,$event)" [ngClass]="{'active': lastPage===page}">Last page</a>-->
+</ul>
+<ul class="nav nav-pills">
+    <a class="nav-link">Amount per page: </a>
+<!--    <a class="nav-link" href="" (click)="setMaxNumber(1,$event)" [ngClass]="{'active': 1===size}">1</a>-->
+    <a class="nav-link" href="" (click)="setMaxNumber(5,$event)" [ngClass]="{'active': 5===size}">5</a>
+    <a class="nav-link" href="" (click)="setMaxNumber(10,$event)" [ngClass]="{'active': 10===size}">10</a>
+    <a class="nav-link" href="" (click)="setMaxNumber(25,$event)" [ngClass]="{'active': 25===size}">25</a>
+    <a class="nav-link" href="" (click)="setMaxNumber(50,$event)" [ngClass]="{'active': 50===size}">50</a>
+</ul>
