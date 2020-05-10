@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+.green-snackbar {
+  background: green !important;
+  color: white;
+  /*align-items: flex-start !important;*/
+  /*justify-content: flex-start !important*/
+}
+
+div {
+  /* spaces in the brake line*/
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+

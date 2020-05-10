@@ -1,0 +1,8 @@
+<div *ngIf="isLoading" style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<form (ngSubmit)="onUpload()" *ngIf="!isLoading">
+  <h4>Change avatar</h4>
+  <input  #myInput type="file" (change)="onFileSelected($event)" accept="image/*">
+  <input type="submit" value="Upload">
+</form>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1.1" datatype="html">
+        <source>This is test text for the translation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/topic/topic.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Text in h1 topics</note>
+        <note priority="1" from="meaning">1</note>
+      </trans-unit>
+      <trans-unit id="1.2" datatype="html">
+        <source>Hello</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/topic/topic.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Text in p topics</note>
+        <note priority="1" from="meaning">2</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

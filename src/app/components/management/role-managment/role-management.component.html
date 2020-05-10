@@ -1,0 +1,25 @@
+<div class="container">
+  <form (ngSubmit)="deleteRole()">
+  <mat-form-field>
+    <mat-label>User roles</mat-label>
+    <select matNativeControl [(ngModel)]="roleId" name="userRoleRemove">
+  <option *ngFor="let role of userRoles" [value]=[role.id]>
+    {{role.name}}
+  </option>
+    </select>
+  </mat-form-field>
+  <button type="submit" class="btn btn-success btn-block">Remove role</button>
+  </form>
+  <form (ngSubmit)="saveRole()">
+  <mat-form-field>
+    <mat-label>Not User roles</mat-label>
+    <select matNativeControl [(ngModel)]="roleId" name="car">
+      <option value="" selected></option>
+      <option *ngFor="let roleNot of notUserRoles" [value]="roleNot.id">
+        {{roleNot.name}}
+      </option>
+    </select>
+  </mat-form-field>
+    <button type="submit" class="btn btn-success btn-block">Add role</button>
+  </form>
+</div>
