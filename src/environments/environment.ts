@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  userServiceIp: 'localhost:8000',
+  topicServiceIp: 'localhost:8001',
+  // userServiceIp: 'localhost:8443',
+  // topicServiceIp: 'localhost:8444',
+  // userServiceIp: '34.120.16.133',
+  // topicServiceIp: '34.120.16.133',
+  firebaseAPIKey: 'AIzaSyBFWOe0q4FWNOhpVjZ8t0H-RROHE2wcxMo',
 };
 
 /*

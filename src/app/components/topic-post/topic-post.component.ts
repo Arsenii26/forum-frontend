@@ -26,6 +26,7 @@ export class TopicPostComponent implements OnInit, OnDestroy {
   detailsList: Array<PostDetails>;
   usersList: Array<User>;
   errorMessage: string;
+  loadingError: string;
   currentUser: User;
   postDetailsWithUsers: Array<UserAndPostDetailsDto>; // dto
   userPost = false;
@@ -78,7 +79,6 @@ export class TopicPostComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     this.postNumber = parseInt(localStorage.getItem('currentPostDetails'));
-
     this.topicService.findAllPostsDetails(this.postNumber).subscribe(data => {
       // this.detailsList = JSON.parse(data.users);
       // this.detailsList = data.postDetails;
@@ -89,7 +89,14 @@ export class TopicPostComponent implements OnInit, OnDestroy {
       this.topicService.setUserList(data.users);
       this.usersList = this.topicService.getUserList();
       this.isLoading = false;
-    });
+    },
+      (error) => {
+        console.log('Some error! ' + error);
+        // this.snackbar.open('this went wrong' + error);
+        // this.router.navigate(['/error']);
+        this.loadingError = 'Server turned off';
+        this.isLoading = false;
+      });
     if (this.currentUser !== null && this.currentUser.userId !== null) {
       this.userPost = true;
     }

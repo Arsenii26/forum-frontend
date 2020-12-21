@@ -7,13 +7,20 @@ import { PasswordRenewDto } from '../dto/passwordRenewDto';
 import {Role} from '../models/role';
 import {Post} from '../models/post';
 import {Image} from '../models/image';
+import {environment} from '../../environments/environment'; // will be swap with prod
 
-
-// let API_URL = "http://localhost:8000/service/";
 // gateway path
-const API_URL = 'http://localhost:8765/api/user/service/';
-const API_URL_MANAG = 'http://localhost:8765/api/user/manag/';
-
+// const API_URL = 'http://localhost:8765/api/user/service/';
+// const API_URL_MANAG = 'http://localhost:8765/api/user/manag/';
+// without sever
+// const API_URL = 'http://34.72.209.196:8000/api/user/service/';
+// const API_URL_MANAG = 'http://34.72.209.196:8000/api/user/manag/';
+// local
+const API_URL = 'http://localhost:8000/api/user/service/';
+const API_URL_MANAG = 'http://localhost:8000/api/user/manag/';
+// with env variable
+// const API_URL = 'https://' + environment.userServiceIp + '/api/user/service/';
+// const API_URL_MANAG = 'https://' + environment.userServiceIp + '/api/user/manag/';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,6 +51,7 @@ export class UserService {
 
      return this.http.get<any>(API_URL + 'login', {headers}).pipe(
        map(response => {
+         console.log(response);
          if (response) {
            localStorage.setItem('currentUser', JSON.stringify(response));
            this.currentUserSubject.next(response);
@@ -52,6 +60,35 @@ export class UserService {
        })
      );
    }
+
+  loginByKey(key: string): Observable<any> {
+
+    return this.http.post(`${API_URL}` + 'loginByKey', JSON.stringify(key),
+      {headers: {'Content-Type': 'application/json; charset=UTF-8'}}).pipe(
+      map(response => {
+        if (response) {
+          console.log(response);
+          localStorage.setItem('currentUser', JSON.stringify(response)); // refresh user component in the cookies
+          if (response instanceof User) {
+            this.currentUserSubject.next(response);
+          }
+        }
+        return response;
+      })
+    );
+
+    // return this.http.post<any>(API_URL + 'loginByKey',
+    //   {headers: {'Content-Type': 'application/json; charset=UTF-8'}}).pipe(
+    //     map(response => {
+    //       console.log(response);
+    //       if (response) {
+    //         localStorage.setItem('currentUser', JSON.stringify(response));
+    //         this.currentUserSubject.next(response);
+    //       }
+    //       return response;
+    //     })
+    // );
+  }
 
   // get logged in user if refreshed page
   autoLogin() {

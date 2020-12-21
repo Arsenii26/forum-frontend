@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="card card-container">
+    <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card"/>
+    <form name="form-signin" (ngSubmit)="f.form.valid && loginByKey()" #f="ngForm" novalidate>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+      <div class="alert alert-success" role="alert" *ngIf="successMessage">
+        {{successMessage}}
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': f.submitted}">
+        <label for="key">Key</label>
+        <input type="key" name="key" class="form-control" (keydown.space)="$event.preventDefault()"
+               id="key" [(ngModel)]="key" required/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Login by key</button>
+    </form>
+    <a routerLink="/login" class="btn btn-link">Login by password</a>
+  </div>
+</div>

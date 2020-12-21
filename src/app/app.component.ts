@@ -27,7 +27,7 @@ export class AppComponent {
     this.userService.autoLogin();
     // Call it observable because it can be changed from other pages as login
     this.userService.currentUser.subscribe(data => {
-      // console.log(data); // debug
+      console.log(data); // debug
       this.currentUser = data;
 
       if (this.currentUser !== null) {

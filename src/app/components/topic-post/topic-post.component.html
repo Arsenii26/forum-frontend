@@ -1,3 +1,6 @@
+<div class="alert alert-danger" *ngIf="loadingError">
+  <strong>Can't load the data!</strong> {{loadingError}}
+</div>
 <div *ngIf="userPost">
 <br>
 <div class="text-center">
@@ -11,7 +14,10 @@
 <div *ngIf="isLoading" style="text-align: center">
   <app-loading-spinner></app-loading-spinner>
 </div>
-<div class="contailer" *ngIf="!isLoading">
+<div *ngIf="errorMessage" style="text-align: center">
+  Error
+</div>
+<div class="contailer" *ngIf="!isLoading && !errorMessage">
   <!--    HERE: using dialog, not separate page -->
 <!--  <button (click)="showPostDetails()" class="btn btn-lg btn-success" >Add new</button> <hr/>-->
 
@@ -27,8 +33,8 @@
       <ng-container *ngFor="let user of usersList; index as ind">
       <ng-container *ngIf="user.userId === item.userId" >
       <h5>User: {{user.username}}</h5>
-        <img *ngIf="user.image === null" src="/assets/images/questionmark.jpg" width="130" height="90" alt="avatar" class="img-thumbnail">
-        <img *ngIf="user.image !== null" src="{{user.image.image}}" width="130" height="90" alt="avatar" class="img-thumbnail">
+        <img *ngIf="user.image === null" src="/assets/images/questionmark.jpg"  alt="avatar" class="img-thumbnail">
+        <img *ngIf="user.image !== null" src="{{user.image.image}}" alt="avatar" class="img-thumbnail">
       <p>{{user.firstName}} {{user.lastName}}</p>
     </ng-container>
       </ng-container>

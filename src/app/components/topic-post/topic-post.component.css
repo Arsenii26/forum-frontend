@@ -1,3 +1,7 @@
+.img-thumbnail {
+  width: 130px;
+  height: 120px;
+}
 .contailer{
     align-items: center;
     margin: auto;

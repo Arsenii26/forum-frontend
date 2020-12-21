@@ -5,6 +5,9 @@
   <div class="alert alert-success" *ngIf="infoMessage">
     <strong>Successful!</strong> {{infoMessage}}
   </div>
+  <div class="alert alert-danger" *ngIf="loadingError">
+    <strong>Can't load the data!</strong> {{loadingError}}
+  </div>
   <br>
   <div *ngIf="!isLoading" style="text-align: center">
 <!--    i18-->

@@ -53,7 +53,8 @@ login() {
     // temp solution
     this.isLoading = false;
     // Or your account was disabled
-    this.errorMessage = 'Username or password is incorrect.\nOr your account wasn\'t activated';
+    // this.errorMessage = 'Username or password is incorrect.\nOr your account wasn\'t activated';
+    this.errorMessage = 'Username or password is incorrect';
   });
 }
 

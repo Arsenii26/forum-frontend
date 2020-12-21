@@ -9,11 +9,12 @@
 
 <div class="container">
   <fieldset class="form-group">
-    <img *ngIf="currentUser.image === null" src="/assets/images/questionmark.jpg" width="280" height="240" alt="avatar" class="img-thumbnail">
-    <img *ngIf="currentUser.image !== null" src="{{currentUser.image.image}}" width="280" height="240" alt="{{currentUser.username}}" class="img-thumbnail">
+    <img *ngIf="currentUser.image === null" src="/assets/images/questionmark.jpg"  alt="avatar" class="img-thumbnail">
+    <img *ngIf="currentUser.image !== null" src="{{currentUser.image.image}}"  alt="{{currentUser.username}}" class="img-thumbnail">
     <br>
     <app-image-upload></app-image-upload>
   </fieldset>
+  <hr>
 	<div class="row">
 
         <div class="col-sm-6 my-auto text-center">
@@ -69,12 +70,11 @@
 
   <!-- sm-6 -->
   </div>
-
     <div class="col-sm-12 col-md-6 col-lg-4 mx-auto text-center">
       <form (ngSubmit)="deleteUserAccount()">
         <label>Delete your account</label>
         <input type="password"[(ngModel)]="passwordForDelete" class="form-control" name="password" placeholder="Confirm your password to delete">
-        <input type="submit" class="btn btn-outline-danger" value="Delete">
+        <br> <input type="submit" class="btn btn-outline-danger" value="Delete">
       </form>
     </div>
     <!-- row -->

@@ -17,6 +17,7 @@ export class AdminGuard implements CanActivate {
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     // return boolean observable
     if (this.userService.userAdmin === undefined) {
+      // console.log('Admin role: ' + this.userService.userAdmin);  // debug
       this.router.navigate(['']);
     }
     return this.userService.userAdmin.pipe(
@@ -24,6 +25,7 @@ export class AdminGuard implements CanActivate {
       take(1),
       map(userAdmin => {
         const isAdmin = !!userAdmin;
+        // console.log('Real admin: ' + isAdmin); // debug
         if (isAdmin) {
           return true;
         }

@@ -48,9 +48,9 @@ export class ImageUploadComponent implements OnInit {
 
   // method will upload image to Firebase storage
   async onUpload() {
-    this.isLoading = true;
     const randomId = Math.random().toString(36).substring(2); // random token
     if (this.selectedFile) {
+      this.isLoading = true;
       // const filePath = `${this.basePath}/` + randomId + `_` + `${this.selectedFile.name}`;    // path at which image will be stored in the firebase storage
       const filePath = `${this.basePath}` + randomId + `_` + `${this.selectedFile.name}`;    // store in main folder
       const fileRef = this.afStorage.ref(filePath); // create reference for getting url
@@ -79,7 +79,7 @@ export class ImageUploadComponent implements OnInit {
           );
       });
         this.isLoading = false;
-        this.myInputVariable.nativeElement.value = ''; // reset loaded image (or user can upload second time)
+        // this.myInputVariable.nativeElement.value = ''; // reset loaded image (or user can upload second time) - IF ACTIVE THAN ERROR IN CONSOLE
         this.selectedFile = null; // reset loaded image into memory (or user can upload second time)
       });
     } else {alert('Please select an image'); }
@@ -92,7 +92,7 @@ export class ImageUploadComponent implements OnInit {
 
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 2000,
+      duration: 7000,
       panelClass: ['green-snackbar'],
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
@@ -101,7 +101,7 @@ export class ImageUploadComponent implements OnInit {
 
   openSnackBarDefault(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 5000,
+      duration: 7000,
       verticalPosition: 'bottom',
       horizontalPosition: 'left',
     });

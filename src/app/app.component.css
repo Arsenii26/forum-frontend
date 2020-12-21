@@ -1,6 +1,9 @@
 /**
 Dark / light theme
  */
+.navbar {
+  height: 80px;
+}
 .main{
   padding: 25px;
   background: var(--background);

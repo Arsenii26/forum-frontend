@@ -26,6 +26,7 @@ export class TopicComponent implements OnInit, OnDestroy   {
 
   postList: Array<Post>;
   errorMessage: string;
+  loadingError: string;
   infoMessage: string;
   currentUser: User;
 
@@ -114,7 +115,14 @@ export class TopicComponent implements OnInit, OnDestroy   {
       // console.log('Current page' + this.currentPage); // debug
       this.topicService.setTopics(data['content']);
       this.isLoading = false;
-    });
+    },
+      (error) => {
+        console.log('Some error! ' + error);
+        // this.snackbar.open('this went wrong' + error);
+        // this.router.navigate(['/error']);
+        this.loadingError = 'Server turned off';
+        this.isLoading = false;
+      });
     if (this.currentUser !== null && this.currentUser.userId !== null) {
       this.userPost = true;
     }

@@ -7,6 +7,7 @@ import { PasswordRenewDto } from 'src/app/dto/passwordRenewDto';
 import {Subscription} from 'rxjs';
 import {FormGroup} from '@angular/forms';
 import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-	constructor(private userService: UserService, private router: Router,  private route: ActivatedRoute) {
+	constructor(private userService: UserService, private router: Router,  private route: ActivatedRoute, private snackBar: MatSnackBar) {
 
 	}
 
@@ -87,6 +88,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
         this.infoMessage = 'Deleted'; // alert here should be
         // here should be confirmation for delete
         this.userService.logOut().subscribe(); // logout user from localstorage
+        this.openSnackBar('Deleted successfully :(');
         this.router.navigate(['login']); // redirect to avoid possible errors
       }, err => {
         if (!err || err.status !== 409) {
@@ -125,6 +127,14 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     console.log(this.croppedImage);
   }
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 2000,
+      panelClass: ['green-snackbar'],
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+    });
+  }
   // reset error
   onHandleError() {
     // this.error = null;

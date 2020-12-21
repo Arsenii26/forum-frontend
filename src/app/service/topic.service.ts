@@ -5,9 +5,18 @@ import {Post} from '../models/post';
 import {PostDetails} from '../models/postDetails';
 import {TopicComponent} from '../components/topic/topic.component';
 import {User} from '../models/user';
+import {environment} from '../../environments/environment';
 
-
-const API_URL = 'http://localhost:8765/api/topic/service/';
+// with server
+// const API_URL = 'http://localhost:8765/api/topic/service/';
+// without server
+const API_URL = 'http://localhost:8001/api/topic/service/';
+// with docker local
+// const API_URL = 'http://192.168.99.100:8001/api/topic/service/';
+// with kubernetes
+// const API_URL = 'http://34.71.105.91:8001/api/topic/service/';
+// with env variable
+// const API_URL = 'https://' + environment.topicServiceIp + '/api/topic/service/';
 
 @Injectable({
   providedIn: 'root'

@@ -12,6 +12,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {AdminGuard} from './auth/admin.guard';
 import {ConfirmAccountComponent} from './components/confirm-account/confirm-account.component';
 import {RememberPasswordComponent} from './components/remember-password/remember-password.component';
+import {LoginByKeyComponent} from './components/login/login-by-key/login-by-key.component';
 
 const routes: Routes = [
   // default page
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'confirm/:token', component: ConfirmAccountComponent},
+  {path: 'login-by-key', component: LoginByKeyComponent},
   {path: 'remember', component: RememberPasswordComponent},
 
   // only for auth users

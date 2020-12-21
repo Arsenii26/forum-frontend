@@ -41,6 +41,9 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
+import {environment} from '../environments/environment';
+import { LoginByKeyComponent } from './components/login/login-by-key/login-by-key.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
     RememberPasswordComponent,
     ImageCropperComponent,
     ImageUploadComponent,
+    LoginByKeyComponent,
+    ErrorPageComponent,
   ],
     imports: [
         BrowserModule,
@@ -87,7 +92,8 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
         }),
         ImageCropperModule,
         AngularFireModule.initializeApp({ // firebase credentials
-        apiKey: 'AIzaSyBFWOe0q4FWNOhpVjZ8t0H-RROHE2wcxMo',
+        // apiKey: 'AIzaSyBFWOe0q4FWNOhpVjZ8t0H-RROHE2wcxMo',
+        apiKey: environment.firebaseAPIKey,
         authDomain: 'images-2be78.firebaseapp.com',
         storageBucket: 'images-2be78.appspot.com',
         projectId: 'images-2be78',

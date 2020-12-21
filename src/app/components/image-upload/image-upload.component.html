@@ -4,5 +4,5 @@
 <form (ngSubmit)="onUpload()" *ngIf="!isLoading">
   <h4>Change avatar</h4>
   <input  #myInput type="file" (change)="onFileSelected($event)" accept="image/*">
-  <input type="submit" value="Upload">
+  <input type="submit" value="Upload" class="button">
 </form>
