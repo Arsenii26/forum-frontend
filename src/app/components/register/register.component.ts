@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
           this.isLoading = false;
           this.errorMessage = 'Email is already exist';
         }
+        this.isLoading = false;
       }
     );
   }
